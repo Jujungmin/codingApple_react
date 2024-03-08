@@ -1,7 +1,7 @@
 /*eslint-disable*/
 // lint 끄는 기능임
 import { useState } from 'react'; // useState사용시 생성
-import './App.css';
+import './App.scss';
 
 function App() {
   let post = '강남 우동 맛집'; // 자료잠깐저장할 땐 변수 뿐만아니라 state
@@ -11,7 +11,7 @@ function App() {
   let [글제목, 글제목변경] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬 독학']); // state쓰던 html은 자동으로 재렌더링됨.
   /* 글제목 : state에 보관했던 자료 나옴
    * 글제목변경(변경되는데이터) : state변경 도와주는 함수 */
-  let [좋아요, 좋아요변경] = useState([0, 20, 11]);
+  let [좋아요, 좋아요변경] = useState([0, 0, 0]);
 
   let [modal, setModal] = useState(false);
 
@@ -31,7 +31,7 @@ function App() {
       <button onClick={ ()=> {
         let copy = [...글제목];
         copy[0] = ['여자 코트 추천'];
-        글제목변경(copy[0]);
+        글제목변경(copy);
       } }>수정버튼</button>
       <button onClick={ ()=> {
         let copy = [...글제목];
@@ -62,14 +62,14 @@ function App() {
         // })
         글제목.map(function(a, i) {
           return (
-          <div className="list" key={i}> {/* 반복문으로html생성하면 key={html마다다른숫자} 추가해야 됨 */}
+          <div className="list" key={a}> {/* 반복문으로html생성하면 key={html마다다른숫자} 추가해야 됨 */}
             <h4>
-              <button onClick={ ()=> { setModal(!modal) } }>{ 글제목[i] }</button>
+              <button onClick={ ()=> { setModal(!modal); console.log(i) } }>{ 글제목[i] }</button>
               <span onClick={ ()=> {
                 let copy = [...좋아요];
                 copy[i] += 1;
                 좋아요변경(copy);
-              } }>💙</span> { 좋아요[i] }</h4>
+              } }> 💙 </span>{ 좋아요[i] }</h4>
             <p>2월 17일 발행</p>
           </div>
           )
